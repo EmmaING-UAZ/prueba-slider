@@ -108,6 +108,7 @@ body {
   opacity: 0;
   animation: animate 1s ease-in-out 0.6s 1 forwards;
   transition: background 0.3s, border 0.3s;
+  border-radius: 50px;
 }
 
 .content button:hover {
@@ -154,88 +155,76 @@ body {
 }
 
 @media (max-width: 768px) {
-  body {
-    overflow: auto; /* Allow scrolling if content overflows, but container is vh */
-  }
-
   .container {
-    width: 100%;
-    height: 100vh;
-    box-shadow: none;
-    background-size: cover;
-    background-position: center;
-    transition: background-image 0.5s ease-in-out;
+    width: 90vw;
+    height: calc(90vw * 0.6); /* Maintain aspect ratio (480/800 = 0.6) */
+    min-height: 288px; /* 90vw at 320px screen width * 0.6 */
   }
 
-  .slide {
-    /* Reset from previous horizontal scroll implementation */
-    display: block;
-    overflow: visible;
+  /* This is the rule for the preview cards */
+  .slide .item {
+    width: 120px;
+    height: 180px;
   }
 
-  .slide .item,
-  .slide .item:nth-child(n + 1) {
-    /* Hide all items by default on mobile */
-    display: none;
-    /* Reset all positioning from desktop and previous mobile versions */
-    position: static;
-    transform: none;
-    width: auto;
-    height: auto;
-    flex: none;
-    opacity: 1;
-  }
-
+  /* These two rules MUST be present to create the main slide view */
+  .slide .item:nth-child(1),
   .slide .item:nth-child(2) {
-    /* Show only the active item */
-    display: block;
     width: 100%;
     height: 100%;
-    position: absolute;
     top: 0;
     left: 0;
-    background-image: none !important; /* IMPORTANT: Let container background show through */
-    background-color: rgba(0,0,0,0.2); /* A slight overlay for text readability */
-    box-shadow: none;
+    transform: none;
     border-radius: 0;
   }
 
-  .item .content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 90%;
-    max-width: 500px;
-    text-align: center;
-    padding: 20px;
-    /* Remove background from content block itself, as the item now has an overlay */
-    background: none;
+  /* Reposition the preview cards based on the new, smaller layout */
+  .slide .item:nth-child(3) {
+    left: 65%;
   }
 
-  .content .name {
-    font-size: 36px;
+  .slide .item:nth-child(4) {
+    left: calc(65% + 130px); /* 120px card width + 10px margin */
   }
 
-  .content .des {
-    font-size: 16px;
-    margin-top: 15px;
-    margin-bottom: 25px;
+  .slide .item:nth-child(5) {
+    left: calc(65% + 260px);
   }
 
-  .content button {
-    padding: 12px 24px;
-    font-size: 16px;
-    /* Restore animations */
-    animation: animate 1s ease-in-out 0.6s 1 forwards;
+  .slide .item:nth-child(n + 6) {
+    left: calc(65% + 390px);
     opacity: 0;
   }
 
+  .item .content {
+    left: 30px;
+    top: 50%;
+    width: 60%; /* Use percentage for content width */
+    max-width: 250px;
+    transform: translateY(-50%);
+  }
+
+  .content .name {
+    font-size: 24px;
+  }
+
+  .content .des {
+    font-size: 13px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    /* Add a subtle shadow for readability */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.7);
+  }
+
+  .content button {
+    padding: 8px 18px;
+    font-size: 13px;
+  }
+
   .button {
-    display: none; /* Keep nav arrows hidden on mobile */
+    display: block; /* Make buttons visible */
+    bottom: 15px;
+    /* Scale down the buttons themselves */
+    transform: scale(0.9);
   }
 }
