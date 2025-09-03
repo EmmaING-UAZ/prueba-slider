@@ -139,8 +139,8 @@ body {
 
 .button button {
   width: 40px;
-  height: 35px;
-  border-radius: 8px;
+  height: 40px;
+  border-radius: 50%;
   border: none;
   cursor: pointer;
   margin: 0 5px;
@@ -166,27 +166,39 @@ body {
     border-radius: 0;
   }
 
-  .slide .item:nth-child(3),
-  .slide .item:nth-child(4),
-  .slide .item:nth-child(5),
-  .slide .item:nth-child(n + 6) {
+  .slide .item:nth-child(n + 3) {
     left: 100%;
     opacity: 0;
+    visibility: hidden;
   }
 
   .item .content {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    width: 80%;
+    width: 90%;
+    max-width: 400px;
     text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
   }
 
   .content .name {
-    font-size: 30px;
+    font-size: 28px;
   }
 
   .content .des {
-    font-size: 14px;
+    font-size: 16px;
+    margin-bottom: 25px;
+  }
+
+  .content button {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+
+  .button {
+    bottom: 30px;
   }
 }
